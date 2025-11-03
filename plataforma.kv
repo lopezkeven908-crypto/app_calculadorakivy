@@ -1,1 +1,91 @@
-  
+<CalculatorLayout>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    Label:
+        id: result
+        text: '0'
+        font_size: 40
+        size_hint_y: 0.2
+        halign: 'right'
+        valign: 'middle'
+        text_size: self.size
+
+    GridLayout:
+        cols: 4
+        spacing: 10
+        size_hint_y: 0.8
+
+        Button:
+            text: 'AC'
+            background_color: 1, 0, 0, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: 'C'
+            background_color: 1, 0, 0, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '='
+            background_color: 1, 0, 0, 1
+            on_press: root.on_button_press(self)
+        Widget:
+
+        Button:
+            text: '7'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '8'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '9'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '÷'
+            background_color: 0, 1, 0, 1
+            on_press: root.on_button_press(self)
+
+        Button:
+            text: '4'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '5'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '6'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: 'x'
+            background_color: 0, 1, 0, 1
+            on_press: root.on_button_press(self)
+
+        Button:
+            text: '1'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '2'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '3'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Button:
+            text: '-'
+            background_color: 0, 1, 0, 1
+            on_press: root.on_button_press(self)
+
+        Button:
+            text: '0'
+            background_color: 0, 0, 1, 1
+            on_press: root.on_button_press(self)
+        Widget:
+        Widget:
+        Widget:
