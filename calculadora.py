@@ -1,66 +1,44 @@
+# Importamos las clases necesarias de Kivy
 from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.button import Button
-from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
+from kivy.lang import Builder
 
+# Cargamos el archivo de diseño .kv
+Builder.load_file('plataforma.kv')
+
+# Clase principal que maneja la lógica de la calculadora
 class CalculatorLayout(BoxLayout):
-    def __init__(self, **kwargs):
-        super().__init__(orientation='vertical', **kwargs)
-        self.result = Label(text='0', font_size=40, size_hint=(1, 0.2), halign='right', valign='middle')
-        self.result.bind(size=self.result.setter('text_size'))
-        self.add_widget(self.result)
-
-        buttons = [
-            ['AC', 'C', '='],
-            ['7', '8', '9'],
-            ['4', '5', '6'],
-            ['1', '2', '3'],
-            ['0', '÷', 'x', '-']
-        ]
-
-        grid = GridLayout(cols=4, spacing=10, padding=10)
-
-        for row in buttons:
-            for label in row:
-                btn = Button(text=label, font_size=32)
-                btn.background_color = self.get_color(label)
-                btn.bind(on_press=self.on_button_press)
-                grid.add_widget(btn)
-
-        self.add_widget(grid)
-
-    def get_color(self, label):
-        if label in ['AC', 'C', '=']:
-            return (1, 0, 0, 1)  # Rojo
-        elif label in ['÷', 'x', '-']:
-            return (0, 1, 0, 1)  # Verde
-        else:
-            return (0, 0, 1, 1)  # Azul
-
+    # Función que se ejecuta al presionar un botón
     def on_button_press(self, instance):
-        text = instance.text
-        current = self.result.text
+        text = instance.text              # Texto del botón presionado
+        current = self.ids.result.text    # Texto actual en pantalla
 
         if text == 'AC':
-            self.result.text = '0'
+            self.ids.result.text = '0'    # Reinicia la pantalla
         elif text == 'C':
-            self.result.text = current[:-1] if current != '0' else '0'
+            # Borra el último carácter si no es solo '0'
+            self.ids.result.text = current[:-1] if current != '0' else '0'
         elif text == '=':
             try:
+                # Reemplaza símbolos por operadores reales
                 expression = current.replace('÷', '/').replace('x', '*')
-                self.result.text = str(eval(expression))
+                # Calcula el resultado usando eval
+                self.ids.result.text = str(eval(expression))
             except:
-                self.result.text = 'Error'
+                self.ids.result.text = 'Error'  # Muestra error si falla
         else:
+            # Si el texto es '0', lo reemplaza
             if current == '0':
-                self.result.text = text
+                self.ids.result.text = text
             else:
-                self.result.text += text
+                # Si ya hay texto, lo agrega al final
+                self.ids.result.text += text
 
+# Clase principal de la app
 class CalculadoraApp(App):
     def build(self):
-        return CalculatorLayout()
+        return CalculatorLayout()  # Devuelve el layout principal
 
+# Ejecuta la app si este archivo es el principal
 if __name__ == '__main__':
     CalculadoraApp().run()

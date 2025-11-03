@@ -1,22 +1,26 @@
+#Este es el diseño visual de la calculadora
 <CalculatorLayout>:
-    orientation: 'vertical'
-    padding: 10
-    spacing: 10
+    orientation: 'vertical'  # Organiza los elementos en columna
+    padding: 10              # Espacio interno alrededor
+    spacing: 10              # Espacio entre widgets
 
+    #Etiqueta para mostrar el resultado
     Label:
-        id: result
-        text: '0'
-        font_size: 40
-        size_hint_y: 0.2
-        halign: 'right'
-        valign: 'middle'
-        text_size: self.size
+        id: result           # ID para acceder desde Python
+        text: '0'            # Texto inicial
+        font_size: 40        # Tamaño de letra grande
+        size_hint_y: 0.2     # Ocupa el 20% de la altura
+        halign: 'right'      # Alineado a la derecha
+        valign: 'middle'     # Centrado verticalmente
+        text_size: self.size # Ajusta el texto al tamaño del widget
 
+    #GridLayout para los botones
     GridLayout:
-        cols: 4
-        spacing: 10
-        size_hint_y: 0.8
+        cols: 4              # 4 columnas
+        spacing: 10          # Espacio entre botones
+        size_hint_y: 0.8     # Ocupa el 80% de la altura
 
+        #Botones de control (rojos)
         Button:
             text: 'AC'
             background_color: 1, 0, 0, 1
@@ -29,8 +33,9 @@
             text: '='
             background_color: 1, 0, 0, 1
             on_press: root.on_button_press(self)
-        Widget:
+        Widget:  # Espacio vacío para completar la fila
 
+        #Botones numéricos y operadores
         Button:
             text: '7'
             background_color: 0, 0, 1, 1
