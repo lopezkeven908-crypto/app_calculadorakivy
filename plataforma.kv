@@ -1,26 +1,26 @@
-#Este es el diseño visual de la calculadora
+# Este es el diseño visual de la calculadora
 <CalculatorLayout>:
     orientation: 'vertical'  # Organiza los elementos en columna
     padding: 10              # Espacio interno alrededor
     spacing: 10              # Espacio entre widgets
 
-    #Etiqueta para mostrar el resultado
+    # Etiqueta para mostrar el resultado
     Label:
-        id: result           # ID para acceder desde Python
-        text: '0'            # Texto inicial
-        font_size: 40        # Tamaño de letra grande
-        size_hint_y: 0.2     # Ocupa el 20% de la altura
-        halign: 'right'      # Alineado a la derecha
-        valign: 'middle'     # Centrado verticalmente
-        text_size: self.size # Ajusta el texto al tamaño del widget
+        id: result
+        text: '0'
+        font_size: 40
+        size_hint_y: 0.2
+        halign: 'right'
+        valign: 'middle'
+        text_size: self.size
 
-    #GridLayout para los botones
+    # GridLayout para los botones
     GridLayout:
-        cols: 4              # 4 columnas
-        spacing: 10          # Espacio entre botones
-        size_hint_y: 0.8     # Ocupa el 80% de la altura
+        cols: 4
+        spacing: 10
+        size_hint_y: 0.8
 
-        #Botones de control (rojos)
+        # Fila 1: AC, C, ÷
         Button:
             text: 'AC'
             background_color: 1, 0, 0, 1
@@ -30,12 +30,12 @@
             background_color: 1, 0, 0, 1
             on_press: root.on_button_press(self)
         Button:
-            text: '='
-            background_color: 1, 0, 0, 1
+            text: '÷'
+            background_color: 0, 1, 0, 1
             on_press: root.on_button_press(self)
-        Widget:  # Espacio vacío para completar la fila
+        Widget:
 
-        #Botones numéricos y operadores
+        # Fila 2: 7, 8, 9, +
         Button:
             text: '7'
             background_color: 0, 0, 1, 1
@@ -49,10 +49,11 @@
             background_color: 0, 0, 1, 1
             on_press: root.on_button_press(self)
         Button:
-            text: '÷'
+            text: '+'
             background_color: 0, 1, 0, 1
             on_press: root.on_button_press(self)
 
+        # Fila 3: 4, 5, 6, -
         Button:
             text: '4'
             background_color: 0, 0, 1, 1
@@ -66,10 +67,11 @@
             background_color: 0, 0, 1, 1
             on_press: root.on_button_press(self)
         Button:
-            text: 'x'
+            text: '-'
             background_color: 0, 1, 0, 1
             on_press: root.on_button_press(self)
 
+        # Fila 4: 1, 2, 3, +
         Button:
             text: '1'
             background_color: 0, 0, 1, 1
@@ -83,14 +85,18 @@
             background_color: 0, 0, 1, 1
             on_press: root.on_button_press(self)
         Button:
-            text: '-'
+            text: '+'
             background_color: 0, 1, 0, 1
             on_press: root.on_button_press(self)
 
+        # Fila 5: 0, =
         Button:
             text: '0'
             background_color: 0, 0, 1, 1
             on_press: root.on_button_press(self)
-        Widget:
+        Button:
+            text: '='
+            background_color: 1, 0, 0, 1
+            on_press: root.on_button_press(self)
         Widget:
         Widget:
