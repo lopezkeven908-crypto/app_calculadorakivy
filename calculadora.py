@@ -5,7 +5,7 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 
 #Tamaño de la ventana
-Window.size = (700, 1500)
+Window.size = (700, 1400)
 # ICONO DE LA APLICACION
 Window.set_icon('ID2227887.png')
 
