@@ -1,44 +1,69 @@
-# Importamos las clases necesarias de Kivy
+from kivy.config import Config # Configurar la ventana para que no sea redimensionable
+Config.set('graphics', 'fullscreen', 'auto') # fullscreen = auto se adapta a la pantalla al tamaño completo
+
+Config.set('graphics', 'orientation', 'portrait') # orientation = portrait para que la pantalla este en vertical
+# main.py
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
+from kivy.core.window import Window
 
-# Cargamos el archivo de diseño .kv
+# Establecer tamaño de ventana para que coincida con el diseño
+Window.size = (500, 600)  # Ancho x Alto
+ 
+# ICONO DE LA APLICACION
+Window.set_icon('ID2227887.png')
+
+# Cargar el archivo de diseño .kv
 Builder.load_file('plataforma.kv')
 
-# Clase principal que maneja la lógica de la calculadora
-class CalculatorLayout(BoxLayout):
-    # Función que se ejecuta al presionar un botón
-    def on_button_press(self, instance):
-        text = instance.text              # Texto del botón presionado
-        current = self.ids.result.text    # Texto actual en pantalla
+# Variable global para almacenar la expresión matemática
+expresion = ''
 
-        if text == 'AC':
-            self.ids.result.text = '0'    # Reinicia la pantalla
-        elif text == 'C':
-            # Borra el último carácter si no es solo '0'
-            self.ids.result.text = current[:-1] if current != '0' else '0'
-        elif text == '=':
+# Clase principal del layout
+class CalculadoraLayout(BoxLayout):
+    def on_button_press(self, instance):
+        global expresion
+        texto = instance.text
+        actual = self.ids.result.text
+
+        # Botón de limpiar todo
+        if texto == 'AC':
+            expresion = ''
+            self.ids.result.text = '0'
+
+        # Botón de borrar último carácter
+        elif texto == 'C':
+            expresion = expresion[:-1]
+            self.ids.result.text = expresion if expresion else '0'
+
+        # Botón de igual (=)
+        elif texto == '=':
             try:
-                # Reemplaza símbolos por operadores reales
-                expression = current.replace('÷', '/').replace('x', '*')
-                # Calcula el resultado usando eval
-                self.ids.result.text = str(eval(expression))
+                # Reemplazar símbolos visuales por operadores reales
+                expresion_evaluable = expresion.replace('÷', '/').replace('×', '*').replace('–', '-')
+                resultado = str(eval(expresion_evaluable))
+                self.ids.result.text = resultado
+                expresion = resultado
             except:
-                self.ids.result.text = 'Error'  # Muestra error si falla
+                self.ids.result.text = 'Error'
+                expresion = ''
+
+        # Cualquier otro botón (número u operador)
         else:
-            # Si el texto es '0', lo reemplaza
-            if current == '0':
-                self.ids.result.text = text
+            if actual == '0' or actual == 'Error':
+                expresion = texto
             else:
-                # Si ya hay texto, lo agrega al final
-                self.ids.result.text += text
+                expresion += texto
+            self.ids.result.text = expresion
 
 # Clase principal de la app
 class CalculadoraApp(App):
     def build(self):
-        return CalculatorLayout()  # Devuelve el layout principal
+        self.title = 'Calculadora Cbta131' #tiitulo de la ventana
+        set_icon = 'ID2227887.png' #icono de la ventana
+        return CalculadoraLayout()
 
-# Ejecuta la app si este archivo es el principal
+# Ejecutar la app
 if __name__ == '__main__':
     CalculadoraApp().run()
