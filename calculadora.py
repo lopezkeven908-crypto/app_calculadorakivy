@@ -1,16 +1,11 @@
-from kivy.config import Config # Configurar la ventana para que no sea redimensionable
-Config.set('graphics', 'fullscreen', 'auto') # fullscreen = auto se adapta a la pantalla al tamaño completo
-
-Config.set('graphics', 'orientation', 'portrait') # orientation = portrait para que la pantalla este en vertical
 # main.py
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.core.window import Window
 
-# Establecer tamaño de ventana para que coincida con el diseño
-Window.size = (500, 600)  # Ancho x Alto
- 
+#Tamaño de la ventana
+Window.size = (700, 1500)
 # ICONO DE LA APLICACION
 Window.set_icon('ID2227887.png')
 
